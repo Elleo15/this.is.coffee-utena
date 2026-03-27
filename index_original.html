@@ -1,0 +1,1790 @@
+<!doctype html>
+<html lang="lt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>This.is.Coffee — Utena</title>
+    <meta
+      name="description"
+      content="Specialty coffee in the heart of Utena. Warm atmosphere, crafted espresso, fresh sweets. Maironio g. 8, Utena."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #faf6f0;
+        --warm: #f2e8d9;
+        --coffee: #3d2314;
+        --espresso: #1a0a03;
+        --gold: #c4922a;
+        --gold-light: #e8c06a;
+        --text: #2a1a0e;
+        --muted: #7a6555;
+        --border: #e0d0bc;
+        --card: #ffffff;
+        --radius: 12px;
+      }
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--cream);
+        color: var(--text);
+        overflow-x: hidden;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Cormorant Garamond", serif;
+      }
+      .container {
+        width: 92%;
+        max-width: 1080px;
+        margin: 0 auto;
+      }
+
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: rgba(250, 246, 240, 0.93);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        padding: 14px 0;
+        transition: box-shadow 0.3s;
+      }
+      header.scrolled {
+        box-shadow: 0 4px 24px rgba(61, 35, 20, 0.08);
+      }
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .logo {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.55rem;
+        font-weight: 700;
+        color: var(--coffee);
+        text-decoration: none;
+        letter-spacing: -0.02em;
+        white-space: nowrap;
+      }
+      .logo span {
+        color: var(--gold);
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+      .nav-links a {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover {
+        color: var(--coffee);
+      }
+      .lang-toggle {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        background: var(--warm);
+        border: 1px solid var(--border);
+        border-radius: 30px;
+        padding: 4px;
+      }
+      .lang-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        padding: 5px 13px;
+        border-radius: 24px;
+        color: var(--muted);
+        transition: all 0.2s;
+      }
+      .lang-btn.active {
+        background: var(--coffee);
+        color: #fff;
+      }
+      .nav-mobile-btn {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+      }
+      .nav-mobile-btn span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--coffee);
+        border-radius: 2px;
+        transition: all 0.3s;
+      }
+
+      @media (max-width: 720px) {
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          align-items: flex-start;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: var(--cream);
+          border-bottom: 1px solid var(--border);
+          padding: 20px 24px;
+          gap: 16px;
+        }
+        .nav-links.open {
+          display: flex;
+        }
+        .nav-mobile-btn {
+          display: flex;
+        }
+      }
+
+      .hero {
+        min-height: 100vh;
+        background:
+          linear-gradient(
+            160deg,
+            rgba(26, 10, 3, 0.75) 0%,
+            rgba(61, 35, 20, 0.52) 100%
+          ),
+          url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=2000&auto=format&fit=crop")
+            center/cover no-repeat;
+        display: flex;
+        align-items: center;
+        padding: 120px 0 80px;
+        position: relative;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100px;
+        background: linear-gradient(transparent, var(--cream));
+        pointer-events: none;
+      }
+      .hero-inner {
+        color: #fff;
+        max-width: 640px;
+      }
+      .hero-pill {
+        display: inline-block;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--gold-light);
+        border: 1px solid rgba(232, 192, 106, 0.35);
+        padding: 6px 16px;
+        border-radius: 30px;
+        margin-bottom: 24px;
+      }
+      .hero h1 {
+        font-size: clamp(2.8rem, 7vw, 5.2rem);
+        font-weight: 700;
+        line-height: 1.07;
+        margin-bottom: 20px;
+        letter-spacing: -0.02em;
+      }
+      .hero h1 em {
+        font-style: italic;
+        color: var(--gold-light);
+      }
+      .hero p {
+        font-size: 1.05rem;
+        color: rgba(255, 255, 255, 0.78);
+        line-height: 1.7;
+        margin-bottom: 36px;
+        max-width: 460px;
+      }
+      .hero-cta {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 600;
+        font-size: 0.88rem;
+        letter-spacing: 0.04em;
+        padding: 13px 26px;
+        border-radius: 50px;
+        text-decoration: none;
+        cursor: pointer;
+        border: none;
+        transition: all 0.25s;
+      }
+      .btn-primary {
+        background: var(--gold);
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background: #b07d1e;
+        transform: translateY(-1px);
+        box-shadow: 0 8px 24px rgba(196, 146, 42, 0.35);
+      }
+      .btn-outline {
+        background: transparent;
+        color: #fff;
+        border: 1.5px solid rgba(255, 255, 255, 0.45);
+      }
+      .btn-outline:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.7);
+      }
+      .hero-meta {
+        display: flex;
+        gap: 32px;
+        flex-wrap: wrap;
+        margin-top: 52px;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        padding-top: 30px;
+      }
+      .hero-meta-item {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .hero-meta-label {
+        font-size: 0.7rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .hero-meta-value {
+        font-size: 0.93rem;
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 500;
+      }
+      .open-dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #4ade80;
+        margin-right: 6px;
+        box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.2);
+      }
+      .closed-dot {
+        background: #f87171;
+        box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.2);
+      }
+
+      .section {
+        padding: 88px 0;
+      }
+      .section-alt {
+        background: var(--warm);
+      }
+      .section-head {
+        text-align: center;
+        margin-bottom: 52px;
+      }
+      .section-head h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        color: var(--coffee);
+        margin-bottom: 12px;
+      }
+      .section-head p {
+        color: var(--muted);
+        font-size: 0.97rem;
+        max-width: 440px;
+        margin: 0 auto;
+        line-height: 1.7;
+      }
+      .section-label {
+        display: inline-block;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 10px;
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 56px;
+        align-items: center;
+      }
+      .about-img-wrap {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        aspect-ratio: 4/5;
+        box-shadow: 0 24px 56px rgba(61, 35, 20, 0.16);
+      }
+      .about-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .about-badge {
+        position: absolute;
+        bottom: 24px;
+        left: 24px;
+        background: var(--coffee);
+        color: #fff;
+        padding: 11px 18px;
+        border-radius: 10px;
+        font-size: 0.82rem;
+        font-weight: 600;
+      }
+      .about-text h2 {
+        font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+        color: var(--coffee);
+        margin-bottom: 18px;
+        line-height: 1.15;
+      }
+      .about-text p {
+        color: var(--muted);
+        line-height: 1.8;
+        margin-bottom: 14px;
+        font-size: 0.96rem;
+      }
+      .about-features {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-top: 28px;
+      }
+      .about-feature {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        padding: 15px;
+        background: var(--warm);
+        border-radius: var(--radius);
+      }
+      .about-feature-icon {
+        font-size: 1.3rem;
+        line-height: 1;
+        margin-top: 2px;
+      }
+      .about-feature-title {
+        font-weight: 600;
+        font-size: 0.88rem;
+        color: var(--coffee);
+      }
+      .about-feature-desc {
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+      .gallery-item {
+        border-radius: var(--radius);
+        overflow: hidden;
+        aspect-ratio: 1;
+      }
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+      }
+      .gallery-item:hover img {
+        transform: scale(1.05);
+      }
+
+      .menu-tabs {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        margin-bottom: 36px;
+        flex-wrap: wrap;
+      }
+      .tab-btn {
+        font-family: "DM Sans", sans-serif;
+        font-weight: 600;
+        font-size: 0.82rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 9px 22px;
+        border-radius: 30px;
+        border: 1.5px solid var(--border);
+        background: none;
+        color: var(--muted);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .tab-btn.active,
+      .tab-btn:hover {
+        background: var(--coffee);
+        color: #fff;
+        border-color: var(--coffee);
+      }
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 12px;
+      }
+      .menu-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 20px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        transition:
+          box-shadow 0.2s,
+          transform 0.2s;
+      }
+      .menu-item:hover {
+        box-shadow: 0 6px 20px rgba(61, 35, 20, 0.08);
+        transform: translateY(-2px);
+      }
+      .menu-item-name {
+        font-weight: 600;
+        font-size: 0.94rem;
+        color: var(--coffee);
+      }
+      .menu-item-desc {
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+      .menu-item-price {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--gold);
+        white-space: nowrap;
+        margin-left: 12px;
+      }
+
+      .hours-map-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.4fr;
+        gap: 24px;
+        align-items: start;
+      }
+      .hours-card {
+        background: var(--coffee);
+        color: #fff;
+        border-radius: 20px;
+        padding: 36px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hours-card::before {
+        content: "☕";
+        position: absolute;
+        right: -8px;
+        top: -8px;
+        font-size: 7rem;
+        opacity: 0.06;
+        line-height: 1;
+        pointer-events: none;
+      }
+      .hours-card h3 {
+        font-size: 1.75rem;
+        color: var(--gold-light);
+        margin-bottom: 22px;
+      }
+      .hours-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.88rem;
+      }
+      .hours-row:last-of-type {
+        border-bottom: none;
+      }
+      .hours-row.today {
+        color: var(--gold-light);
+        font-weight: 600;
+      }
+      .hours-day {
+        color: rgba(255, 255, 255, 0.7);
+      }
+      .hours-row.today .hours-day {
+        color: var(--gold-light);
+      }
+      .hours-time {
+        font-weight: 600;
+      }
+      .hours-contact {
+        margin-top: 24px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .hours-contact p {
+        font-size: 0.86rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+      .hours-contact a {
+        color: var(--gold-light);
+        text-decoration: none;
+      }
+      .map-card {
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 12px 40px rgba(61, 35, 20, 0.1);
+        border: 1px solid var(--border);
+      }
+      .map-card iframe {
+        display: block;
+        width: 100%;
+        height: 360px;
+        border: 0;
+      }
+      .map-cta {
+        padding: 15px 20px;
+        background: var(--card);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .map-cta span {
+        font-size: 0.84rem;
+        color: var(--muted);
+      }
+      .map-cta a {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--gold);
+        text-decoration: none;
+      }
+      .map-cta a:hover {
+        text-decoration: underline;
+      }
+
+      .reviews-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      .review-form-card,
+      .reviews-list-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 30px;
+      }
+      .review-form-card h3 {
+        font-size: 1.5rem;
+        color: var(--coffee);
+        margin-bottom: 22px;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 16px;
+      }
+      .form-label {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--coffee);
+        letter-spacing: 0.03em;
+      }
+      .form-input,
+      .form-textarea {
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.9rem;
+        padding: 11px 14px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        background: var(--cream);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.2s;
+        width: 100%;
+      }
+      .form-input:focus,
+      .form-textarea:focus {
+        border-color: var(--gold);
+      }
+      .form-textarea {
+        resize: vertical;
+        min-height: 88px;
+      }
+      .stars-wrap {
+        display: flex;
+        gap: 6px;
+        margin-top: 4px;
+      }
+      .star-btn {
+        font-size: 1.6rem;
+        cursor: pointer;
+        color: #d1c4b0;
+        background: none;
+        border: none;
+        transition:
+          color 0.15s,
+          transform 0.15s;
+        padding: 0;
+        line-height: 1;
+      }
+      .star-btn:hover,
+      .star-btn.lit {
+        color: var(--gold);
+      }
+      .btn-submit {
+        width: 100%;
+        padding: 13px;
+        background: var(--coffee);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .btn-submit:hover {
+        background: var(--espresso);
+      }
+      .review-success {
+        font-size: 0.85rem;
+        color: #16a34a;
+        margin-top: 10px;
+        display: none;
+      }
+      .reviews-list-card h3 {
+        font-size: 1.5rem;
+        color: var(--coffee);
+        margin-bottom: 16px;
+      }
+      .reviews-stats {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+      .avg-score {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2.6rem;
+        font-weight: 700;
+        color: var(--coffee);
+        line-height: 1;
+      }
+      .avg-stars {
+        color: var(--gold);
+        font-size: 1rem;
+      }
+      .avg-count {
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+      .reviews-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        max-height: 440px;
+        overflow-y: auto;
+        padding-right: 4px;
+      }
+      .reviews-list::-webkit-scrollbar {
+        width: 4px;
+      }
+      .reviews-list::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 4px;
+      }
+      .review-card {
+        padding: 15px;
+        background: var(--warm);
+        border-radius: 10px;
+        border-left: 3px solid var(--gold);
+      }
+      .review-card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+      }
+      .review-name {
+        font-weight: 600;
+        font-size: 0.87rem;
+        color: var(--coffee);
+      }
+      .review-stars {
+        color: var(--gold);
+        font-size: 0.83rem;
+      }
+      .review-comment {
+        font-size: 0.84rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .review-date {
+        font-size: 0.72rem;
+        color: #a89080;
+        margin-top: 5px;
+      }
+      .no-reviews {
+        text-align: center;
+        padding: 40px 20px;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      footer {
+        background: var(--espresso);
+        color: rgba(255, 255, 255, 0.7);
+        padding: 56px 0 28px;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 40px;
+        margin-bottom: 44px;
+      }
+      .footer-brand {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 12px;
+      }
+      .footer-brand span {
+        color: var(--gold);
+      }
+      .footer-desc {
+        font-size: 0.84rem;
+        line-height: 1.75;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .footer-col-title {
+        font-weight: 600;
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--gold-light);
+        margin-bottom: 14px;
+      }
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+      }
+      .footer-links a,
+      .footer-links span {
+        font-size: 0.84rem;
+        color: rgba(255, 255, 255, 0.5);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: var(--gold-light);
+      }
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 22px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .footer-bottom span {
+        font-size: 0.79rem;
+        color: rgba(255, 255, 255, 0.3);
+      }
+      .social-row {
+        display: flex;
+        gap: 12px;
+        margin-top: 18px;
+      }
+      .social-link {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255, 255, 255, 0.5);
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-weight: 700;
+        transition: all 0.2s;
+      }
+      .social-link:hover {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: #fff;
+      }
+
+      @media (max-width: 860px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+        .about-img-wrap {
+          aspect-ratio: 16/9;
+        }
+        .hours-map-grid {
+          grid-template-columns: 1fr;
+        }
+        .reviews-grid {
+          grid-template-columns: 1fr;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 28px;
+        }
+        .gallery-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 560px) {
+        .hero h1 {
+          font-size: 2.4rem;
+        }
+        .hero-meta {
+          gap: 18px;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+      }
+
+      .fade-up {
+        opacity: 0;
+        transform: translateY(22px);
+        transition:
+          opacity 0.65s ease,
+          transform 0.65s ease;
+      }
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <header id="header">
+      <div class="container header-inner">
+        <a href="#" class="logo">This<span>.is.</span>Coffee</a>
+        <nav class="nav-links" id="navLinks">
+          <a href="#about" data-lt="Apie" data-en="About">Apie</a>
+          <a href="#gallery" data-lt="Galerija" data-en="Gallery">Galerija</a>
+          <a href="#menu" data-lt="Meniu" data-en="Menu">Meniu</a>
+          <a href="#hours" data-lt="Darbo laikas" data-en="Hours"
+            >Darbo laikas</a
+          >
+          <a href="#reviews" data-lt="Atsiliepimai" data-en="Reviews"
+            >Atsiliepimai</a
+          >
+          <div class="lang-toggle">
+            <button class="lang-btn active" onclick="setLang('lt')" id="btnLT">
+              LT
+            </button>
+            <button class="lang-btn" onclick="setLang('en')" id="btnEN">
+              EN
+            </button>
+          </div>
+        </nav>
+        <button
+          class="nav-mobile-btn"
+          onclick="toggleNav()"
+          aria-label="Toggle menu"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-inner">
+          <div
+            class="hero-pill"
+            data-lt="Specialty kava • Saldumynai • Pet friendly"
+            data-en="Specialty coffee • Sweets • Pet friendly"
+          >
+            Specialty kava • Saldumynai • Pet friendly
+          </div>
+          <h1
+            data-lt="Kava su <em>charakteriu.</em>"
+            data-en="Coffee with <em>character.</em>"
+          >
+            Kava su <em>charakteriu.</em>
+          </h1>
+          <p
+            data-lt="Raskite mus Utenoje — jauki atmosfera, espresso ir sezoniniai gėrimai jūsų dienai."
+            data-en="Find us in Utena — warm atmosphere, crafted espresso, and seasonal drinks for your day."
+          >
+            Raskite mus Utenoje — jauki atmosfera, espresso ir sezoniniai
+            gėrimai jūsų dienai.
+          </p>
+          <div class="hero-cta">
+            <a
+              href="#menu"
+              class="btn btn-primary"
+              data-lt="Žiūrėti meniu"
+              data-en="See menu"
+              >Žiūrėti meniu</a
+            >
+            <a
+              href="#hours"
+              class="btn btn-outline"
+              data-lt="Darbo laikas"
+              data-en="Opening hours"
+              >Darbo laikas</a
+            >
+          </div>
+          <div class="hero-meta">
+            <div class="hero-meta-item">
+              <span class="hero-meta-label" data-lt="Adresas" data-en="Address"
+                >Adresas</span
+              >
+              <span class="hero-meta-value">Maironio g. 8, Utena</span>
+            </div>
+            <div class="hero-meta-item">
+              <span class="hero-meta-label" data-lt="Dabar" data-en="Right now"
+                >Dabar</span
+              >
+              <span class="hero-meta-value" id="openStatus">—</span>
+            </div>
+            <div class="hero-meta-item">
+              <span
+                class="hero-meta-label"
+                data-lt="Sekite mus"
+                data-en="Follow us"
+                >Sekite mus</span
+              >
+              <span class="hero-meta-value">
+                <a
+                  href="https://www.instagram.com/this.is.coffee/"
+                  target="_blank"
+                  rel="noopener"
+                  style="color: rgba(255, 255, 255, 0.9); text-decoration: none"
+                  >Instagram ↗</a
+                >
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-img-wrap fade-up">
+            <img
+              src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=900&auto=format&fit=crop"
+              alt="Coffee at This.is.Coffee Utena"
+              loading="lazy"
+            />
+            <div
+              class="about-badge"
+              data-lt="Utena, Lietuva 🇱🇹"
+              data-en="Utena, Lithuania 🇱🇹"
+            >
+              Utena, Lietuva 🇱🇹
+            </div>
+          </div>
+          <div class="about-text fade-up">
+            <span class="section-label" data-lt="Apie mus" data-en="About us"
+              >Apie mus</span
+            >
+            <h2
+              data-lt="Vieta, kur kava tampa patirtimi."
+              data-en="A place where coffee becomes an experience."
+            >
+              Vieta, kur kava tampa patirtimi.
+            </h2>
+            <p
+              data-lt="This.is.Coffee — moderni kavos vieta Utenoje, kurioje specialty kava derinama su šviežiais saldumynais ir jauki atmosfera."
+              data-en="This.is.Coffee is a modern coffee spot in Utena where specialty coffee meets freshly made sweets and a cozy atmosphere."
+            >
+              This.is.Coffee — moderni kavos vieta Utenoje, kurioje specialty
+              kava derinama su šviežiais saldumynais ir jauki atmosfera.
+            </p>
+            <p
+              data-lt="Mes tikime, kad gera kava turi savo istoriją — nuo pupelių iki taurės. Kiekvienas puodelis — tai rūpestis ir tradicija."
+              data-en="We believe great coffee has its own story — from the bean to the cup. Every cup is crafted with care and tradition."
+            >
+              Mes tikime, kad gera kava turi savo istoriją — nuo pupelių iki
+              taurės. Kiekvienas puodelis — tai rūpestis ir tradicija.
+            </p>
+            <div class="about-features">
+              <div class="about-feature">
+                <div class="about-feature-icon">🫘</div>
+                <div>
+                  <div
+                    class="about-feature-title"
+                    data-lt="Kokybiškos pupelės"
+                    data-en="Quality beans"
+                  >
+                    Kokybiškos pupelės
+                  </div>
+                  <div
+                    class="about-feature-desc"
+                    data-lt="Stabilūs profiliai ir subalansuotas skonis."
+                    data-en="Consistent roast profiles and balanced taste."
+                  >
+                    Stabilūs profiliai ir subalansuotas skonis.
+                  </div>
+                </div>
+              </div>
+              <div class="about-feature">
+                <div class="about-feature-icon">🥐</div>
+                <div>
+                  <div
+                    class="about-feature-title"
+                    data-lt="Švieži saldumynai"
+                    data-en="Fresh sweets"
+                  >
+                    Švieži saldumynai
+                  </div>
+                  <div
+                    class="about-feature-desc"
+                    data-lt="Desertai, kurie dera su kava."
+                    data-en="Pastries and desserts that complement the coffee."
+                  >
+                    Desertai, kurie dera su kava.
+                  </div>
+                </div>
+              </div>
+              <div class="about-feature">
+                <div class="about-feature-icon">🐾</div>
+                <div>
+                  <div
+                    class="about-feature-title"
+                    data-lt="Draugiška augintiniams"
+                    data-en="Pet friendly"
+                  >
+                    Draugiška augintiniams
+                  </div>
+                  <div
+                    class="about-feature-desc"
+                    data-lt="Atsiveskite šunį — bus jauku."
+                    data-en="Bring your dog — we'll keep it cozy."
+                  >
+                    Atsiveskite šunį — bus jauku.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="gallery">
+      <div class="container">
+        <div class="section-head fade-up">
+          <span class="section-label" data-lt="Galerija" data-en="Gallery"
+            >Galerija</span
+          >
+          <h2
+            data-lt="Jaukumas kiekviename kampe."
+            data-en="Warmth in every corner."
+          >
+            Jaukumas kiekviename kampe.
+          </h2>
+        </div>
+        <div class="gallery-grid fade-up">
+          <div class="gallery-item">
+            <img src="cafeinside-1.jpg" alt="cafe" loading="lazy" />
+          </div>
+          <div class="gallery-item">
+            <img src="bookandcoffee-2.jpg" alt="book" loading="lazy" />
+          </div>
+          <div class="gallery-item">
+            <img src="likeagutabinhand-3.jpg" alt="gutab" loading="lazy" />
+          </div>
+          <div class="gallery-item">
+            <img src="muffinandcoffee-4.jpg" alt="muffin" loading="lazy" />
+          </div>
+          <div class="gallery-item">
+            <img src="pictureonwall-5.jpg" alt="wall" loading="lazy" />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="baristamakeingcoffee-6.jpg"
+              alt="barista"
+              loading="lazy"
+            />
+          </div>
+          <div class="gallery-item">
+            <img src="girlcashier-7.jpg" alt="girl" loading="lazy" />
+          </div>
+          <div class="gallery-item">
+            <img src="intheleavesacup-8.jpg" alt="leaves" loading="lazy" />
+          </div>
+          <div class="gallery-item">
+            <img src="popcorn-9.jpg" alt="popcorn" loading="lazy" />
+          </div>
+          <div class="gallery-item">
+            <img src="2milshakes-10.jpg" alt="milkshake" loading="lazy" />
+          </div>
+          <div class="gallery-item">
+            <img src="greatviewoflibrary-11.jpg" alt="library" loading="lazy" />
+          </div>
+          <div class="gallery-item">
+            <img src="flower-12.jpg" alt="flower" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="menu">
+      <div class="container">
+        <div class="section-head fade-up">
+          <span class="section-label" data-lt="Meniu" data-en="Menu"
+            >Meniu</span
+          >
+          <h2 data-lt="Ką siūlome." data-en="What we offer.">Ką siūlome.</h2>
+          <p
+            data-lt="Kava, arbata ir saldumynai jūsų dienai."
+            data-en="Coffee, tea and sweets for your day."
+          >
+            Kava, arbata ir saldumynai jūsų dienai.
+          </p>
+        </div>
+        <div class="menu-tabs">
+          <button
+            class="tab-btn active"
+            onclick="switchTab('coffee', this)"
+            data-lt="☕ Kava"
+            data-en="☕ Coffee"
+          >
+            ☕ Kava
+          </button>
+          <button
+            class="tab-btn"
+            onclick="switchTab('tea', this)"
+            data-lt="🍵 Arbata"
+            data-en="🍵 Tea"
+          >
+            🍵 Arbata
+          </button>
+          <button
+            class="tab-btn"
+            onclick="switchTab('sweets', this)"
+            data-lt="🥐 Saldumynai"
+            data-en="🥐 Sweets"
+          >
+            🥐 Saldumynai
+          </button>
+        </div>
+        <div class="menu-grid" id="menuGrid"></div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="hours">
+      <div class="container">
+        <div class="section-head fade-up">
+          <span
+            class="section-label"
+            data-lt="Darbo laikas"
+            data-en="Opening hours"
+            >Darbo laikas</span
+          >
+          <h2 data-lt="Kada mus rasite." data-en="When you'll find us.">
+            Kada mus rasite.
+          </h2>
+        </div>
+        <div class="hours-map-grid fade-up">
+          <div class="hours-card">
+            <h3 data-lt="Darbo laikas" data-en="Opening hours">Darbo laikas</h3>
+            <div id="hoursRows"></div>
+            <div class="hours-contact">
+              <p>📍 Maironio g. 8, Utena, 28142 Utenos r. sav.</p>
+              <p>📞 <a href="tel:+37067885833">+370 678 85833</a></p>
+              <p>
+                ✉️
+                <a href="mailto:labas@thisiscoffee.lt">labas@thisiscoffee.lt</a>
+              </p>
+            </div>
+          </div>
+          <div class="map-card">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2295.0!2d25.5983!3d55.4998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46e7f7021e5f75e3%3A0x4d17c7b2d0ee6c5!2sMaironio%20g.%208%2C%2028142%20Utena!5e0!3m2!1slt!2slt!4v1700000000000"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="This.is.Coffee vieta žemėlapyje"
+            ></iframe>
+            <div class="map-cta">
+              <span>Maironio g. 8, Utena</span>
+              <a
+                href="https://maps.google.com/?q=Maironio+g.+8,+Utena,+Lithuania"
+                target="_blank"
+                rel="noopener"
+                data-lt="Atidaryti žemėlapyje ↗"
+                data-en="Open in maps ↗"
+                >Atidaryti žemėlapyje ↗</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="reviews">
+      <div class="container">
+        <div class="section-head fade-up">
+          <span class="section-label" data-lt="Atsiliepimai" data-en="Reviews"
+            >Atsiliepimai</span
+          >
+          <h2 data-lt="Ką sako mūsų svečiai." data-en="What our guests say.">
+            Ką sako mūsų svečiai.
+          </h2>
+        </div>
+        <div class="reviews-grid fade-up">
+          <div class="review-form-card">
+            <h3 data-lt="Palikite atsiliepimą" data-en="Leave a review">
+              Palikite atsiliepimą
+            </h3>
+            <div class="form-group">
+              <label class="form-label" data-lt="Vardas" data-en="Your name"
+                >Vardas</label
+              >
+              <input
+                class="form-input"
+                id="reviewName"
+                maxlength="40"
+                placeholder="Jonas Jonaitis"
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label" data-lt="Įvertinimas" data-en="Rating"
+                >Įvertinimas</label
+              >
+              <div class="stars-wrap" id="starsWrap">
+                <button class="star-btn" onclick="setStars(1)">★</button>
+                <button class="star-btn" onclick="setStars(2)">★</button>
+                <button class="star-btn" onclick="setStars(3)">★</button>
+                <button class="star-btn" onclick="setStars(4)">★</button>
+                <button class="star-btn" onclick="setStars(5)">★</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" data-lt="Komentaras" data-en="Comment"
+                >Komentaras</label
+              >
+              <textarea
+                class="form-textarea"
+                id="reviewComment"
+                maxlength="300"
+                rows="3"
+              ></textarea>
+            </div>
+            <button
+              class="btn-submit"
+              onclick="submitReview()"
+              data-lt="Paskelbti atsiliepimą"
+              data-en="Post review"
+            >
+              Paskelbti atsiliepimą
+            </button>
+            <p
+              class="review-success"
+              id="reviewSuccess"
+              data-lt="✅ Ačiū už atsiliepimą!"
+              data-en="✅ Thank you for your review!"
+            >
+              ✅ Ačiū už atsiliepimą!
+            </p>
+          </div>
+          <div class="reviews-list-card">
+            <h3 data-lt="Atsiliepimai" data-en="Reviews">Atsiliepimai</h3>
+            <div class="reviews-stats" id="reviewsStats" style="display: none">
+              <div class="avg-score" id="avgScore">5.0</div>
+              <div>
+                <div class="avg-stars" id="avgStars">★★★★★</div>
+                <div class="avg-count" id="avgCount"></div>
+              </div>
+            </div>
+            <div class="reviews-list" id="reviewsList"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-brand">This<span>.is.</span>Coffee</div>
+            <p
+              class="footer-desc"
+              data-lt="Specialty kava ir saldumynai Utenoje. Jaukumas kiekviename puodelyje."
+              data-en="Specialty coffee and sweets in Utena. Warmth in every cup."
+            >
+              Specialty kava ir saldumynai Utenoje. Jaukumas kiekviename
+              puodelyje.
+            </p>
+            <div class="social-row">
+              <a
+                href="https://www.facebook.com/this.is.coffee.utena/"
+                target="_blank"
+                class="social-link"
+                rel="noopener"
+                >f</a
+              >
+              <a
+                href="https://www.instagram.com/this.is.coffee/"
+                target="_blank"
+                class="social-link"
+                rel="noopener"
+                >ig</a
+              >
+            </div>
+          </div>
+          <div>
+            <div
+              class="footer-col-title"
+              data-lt="Darbo laikas"
+              data-en="Hours"
+            >
+              Darbo laikas
+            </div>
+            <div class="footer-links">
+              <span
+                data-lt="Pirm.–Penkt.: 08:00–20:00"
+                data-en="Mon.–Fri.: 08:00–20:00"
+                >Pirm.–Penkt.: 08:00–20:00</span
+              >
+              <span
+                data-lt="Šeštadienis: 10:00–20:00"
+                data-en="Saturday: 10:00–20:00"
+                >Šeštadienis: 10:00–20:00</span
+              >
+              <span
+                data-lt="Sekmadienis: 10:00–20:00"
+                data-en="Sunday: 10:00–20:00"
+                >Sekmadienis: 10:00–20:00</span
+              >
+            </div>
+          </div>
+          <div>
+            <div class="footer-col-title" data-lt="Kontaktai" data-en="Contact">
+              Kontaktai
+            </div>
+            <div class="footer-links">
+              <span>Maironio g. 8, Utena</span>
+              <span>28142 Utenos r. sav.</span>
+              <a href="tel:+37067885833">+370 678 85833</a>
+              <a href="mailto:labas@thisiscoffee.lt">labas@thisiscoffee.lt</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© <span id="year"></span> This.is.Coffee • Utena</span>
+          <span data-lt="Skrudinta su meile ☕" data-en="Roasted with love ☕"
+            >Skrudinta su meile ☕</span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      "use strict";
+      let currentLang = localStorage.getItem("tic_lang") || "lt";
+      let currentTab = "coffee";
+      let selectedStars = 0;
+
+      function setLang(lang) {
+        currentLang = lang;
+        localStorage.setItem("tic_lang", lang);
+        document.documentElement.lang = lang;
+        document
+          .getElementById("btnLT")
+          .classList.toggle("active", lang === "lt");
+        document
+          .getElementById("btnEN")
+          .classList.toggle("active", lang === "en");
+        document.querySelectorAll("[data-lt]").forEach((el) => {
+          const val = el.getAttribute("data-" + lang);
+          if (val !== null) el.innerHTML = val;
+        });
+        renderHours();
+        renderMenu(currentTab);
+        renderReviews();
+        updateOpenStatus();
+      }
+
+      function toggleNav() {
+        document.getElementById("navLinks").classList.toggle("open");
+      }
+
+      function isOpen() {
+        const now = new Date(
+          new Date().toLocaleString("en-US", { timeZone: "Europe/Vilnius" }),
+        );
+        const day = now.getDay();
+        const mins = now.getHours() * 60 + now.getMinutes();
+        const isWeekend = day === 0 || day === 6;
+        const openMins = isWeekend ? 10 * 60 : 8 * 60;
+        return mins >= openMins && mins < 20 * 60;
+      }
+
+      function updateOpenStatus() {
+        const el = document.getElementById("openStatus");
+        if (!el) return;
+        const open = isOpen();
+        const dotClass = open ? "open-dot" : "open-dot closed-dot";
+        const label = open
+          ? currentLang === "lt"
+            ? "Atidaryta"
+            : "Open now"
+          : currentLang === "lt"
+            ? "Uždaryta"
+            : "Closed now";
+        el.innerHTML = '<span class="' + dotClass + '"></span>' + label;
+      }
+
+      function renderHours() {
+        const now = new Date(
+          new Date().toLocaleString("en-US", { timeZone: "Europe/Vilnius" }),
+        );
+        const today = now.getDay();
+        const isLT = currentLang === "lt";
+        const rows = [
+          {
+            days: [1, 2, 3, 4, 5],
+            label: isLT ? "Pirmadienis – Penktadienis" : "Monday – Friday",
+            time: "08:00 – 20:00",
+          },
+          {
+            days: [6],
+            label: isLT ? "Šeštadienis" : "Saturday",
+            time: "10:00 – 20:00",
+          },
+          {
+            days: [0],
+            label: isLT ? "Sekmadienis" : "Sunday",
+            time: "10:00 – 20:00",
+          },
+        ];
+        document.getElementById("hoursRows").innerHTML = rows
+          .map((r) => {
+            const isToday = r.days.includes(today);
+            const tag = isToday
+              ? ' <small style="font-size:.75em;opacity:.8;">(' +
+                (isLT ? "šiandien" : "today") +
+                ")</small>"
+              : "";
+            return (
+              '<div class="hours-row' +
+              (isToday ? " today" : "") +
+              '"><span class="hours-day">' +
+              r.label +
+              tag +
+              '</span><span class="hours-time">' +
+              r.time +
+              "</span></div>"
+            );
+          })
+          .join("");
+      }
+
+      const menuData = {
+        coffee: [
+          {
+            name: "Espresso",
+            lt: "Ryškus ir švaras šotas.",
+            en: "Bright and clean shot.",
+            price: "€2.20",
+          },
+          {
+            name: "Cappuccino",
+            lt: "Aksominis pieno putėsiai.",
+            en: "Velvety milk foam.",
+            price: "€3.20",
+          },
+          {
+            name: "Latte",
+            lt: "Švelnus ir subalansuotas.",
+            en: "Smooth and balanced.",
+            price: "€3.50",
+          },
+          {
+            name: "Flat White",
+            lt: "Stiprus, šilkinis mikroputas.",
+            en: "Strong, silky microfoam.",
+            price: "€3.60",
+          },
+          {
+            name: "Filter Coffee",
+            lt: "Dienos single origin.",
+            en: "Daily single origin.",
+            price: "€2.90",
+          },
+          {
+            name: "Iced Latte",
+            lt: "Atgaivinantis, šaltas.",
+            en: "Refreshing and chilled.",
+            price: "€3.80",
+          },
+        ],
+        tea: [
+          {
+            name: "Black Tea",
+            lt: "Klasikinis, stiprus.",
+            en: "Classic, strong.",
+            price: "€2.20",
+          },
+          {
+            name: "Green Tea",
+            lt: "Lengvas, šviežias.",
+            en: "Light, fresh.",
+            price: "€2.20",
+          },
+          {
+            name: "Herbal Tea",
+            lt: "Ramunėlių / mėtų.",
+            en: "Chamomile / mint.",
+            price: "€2.40",
+          },
+          {
+            name: "Chai Latte",
+            lt: "Prieskoninis ir kremingas.",
+            en: "Spiced and creamy.",
+            price: "€3.60",
+          },
+          {
+            name: "Matcha Latte",
+            lt: "Žemiškas ir švelnus.",
+            en: "Earthy and smooth.",
+            price: "€3.90",
+          },
+          {
+            name: "Hot Chocolate",
+            lt: "Turtingas kakava.",
+            en: "Rich cocoa.",
+            price: "€3.40",
+          },
+        ],
+        sweets: [
+          {
+            name: "Kruasanas",
+            lt: "Sviestinė klasika.",
+            en: "Buttery classic.",
+            price: "€2.50",
+          },
+          {
+            name: "Morkų pyragas",
+            lt: "Drėgnas, lengvai prieskoninis.",
+            en: "Moist, lightly spiced.",
+            price: "€3.80",
+          },
+          {
+            name: "Sūrio pyragas",
+            lt: "Kreminė porcija.",
+            en: "Creamy slice.",
+            price: "€3.90",
+          },
+          {
+            name: "Brownie",
+            lt: "Šokoladinis, tirpstantis.",
+            en: "Fudgy chocolate.",
+            price: "€3.20",
+          },
+          {
+            name: "Cinamono ritinys",
+            lt: "Šiltas ir saldus.",
+            en: "Warm and sweet.",
+            price: "€3.30",
+          },
+          {
+            name: "Sezono desertas",
+            lt: "Paklauskite prie prekystalio.",
+            en: "Ask at the counter.",
+            price: "€—",
+          },
+        ],
+      };
+
+      function switchTab(tab, btn) {
+        currentTab = tab;
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderMenu(tab);
+      }
+
+      function renderMenu(tab) {
+        const items = menuData[tab] || [];
+        document.getElementById("menuGrid").innerHTML = items
+          .map(
+            (it) =>
+              '<div class="menu-item"><div><div class="menu-item-name">' +
+              it.name +
+              '</div><div class="menu-item-desc">' +
+              it[currentLang] +
+              '</div></div><div class="menu-item-price">' +
+              it.price +
+              "</div></div>",
+          )
+          .join("");
+      }
+
+      function setStars(val) {
+        selectedStars = val;
+        document
+          .querySelectorAll(".star-btn")
+          .forEach((btn, i) => btn.classList.toggle("lit", i < val));
+      }
+
+      function getReviews() {
+        try {
+          return JSON.parse(localStorage.getItem("tic_reviews") || "[]");
+        } catch {
+          return [];
+        }
+      }
+
+      function submitReview() {
+        const name = document.getElementById("reviewName").value.trim();
+        const comment = document.getElementById("reviewComment").value.trim();
+        if (!name || !comment || !selectedStars) return;
+        const arr = getReviews();
+        arr.unshift({ name, comment, stars: selectedStars, ts: Date.now() });
+        localStorage.setItem("tic_reviews", JSON.stringify(arr.slice(0, 80)));
+        document.getElementById("reviewName").value = "";
+        document.getElementById("reviewComment").value = "";
+        setStars(0);
+        selectedStars = 0;
+        const suc = document.getElementById("reviewSuccess");
+        suc.style.display = "block";
+        setTimeout(() => {
+          suc.style.display = "none";
+        }, 3000);
+        renderReviews();
+      }
+
+      function renderReviews() {
+        const reviews = getReviews();
+        const list = document.getElementById("reviewsList");
+        const stats = document.getElementById("reviewsStats");
+        if (!reviews.length) {
+          list.innerHTML =
+            '<div class="no-reviews">' +
+            (currentLang === "lt"
+              ? "Būkite pirmas, kuris palieka atsiliepimą!"
+              : "Be the first to leave a review!") +
+            "</div>";
+          stats.style.display = "none";
+          return;
+        }
+        const avg = reviews.reduce((a, r) => a + r.stars, 0) / reviews.length;
+        stats.style.display = "flex";
+        document.getElementById("avgScore").textContent = avg.toFixed(1);
+        document.getElementById("avgStars").textContent =
+          "★".repeat(Math.round(avg)) + "☆".repeat(5 - Math.round(avg));
+        document.getElementById("avgCount").textContent =
+          reviews.length +
+          (currentLang === "lt" ? " atsiliepimai" : " reviews");
+        list.innerHTML = reviews
+          .map((r) => {
+            const date = new Date(r.ts).toLocaleDateString(
+              currentLang === "lt" ? "lt-LT" : "en-GB",
+              { year: "numeric", month: "short", day: "numeric" },
+            );
+            return (
+              '<div class="review-card"><div class="review-card-top"><span class="review-name">' +
+              r.name +
+              '</span><span class="review-stars">' +
+              "★".repeat(r.stars) +
+              "☆".repeat(5 - r.stars) +
+              '</span></div><div class="review-comment">' +
+              r.comment +
+              '</div><div class="review-date">' +
+              date +
+              "</div></div>"
+            );
+          })
+          .join("");
+      }
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.1 },
+      );
+      document.querySelectorAll(".fade-up").forEach((el) => io.observe(el));
+
+      window.addEventListener(
+        "scroll",
+        () => {
+          document
+            .getElementById("header")
+            .classList.toggle("scrolled", window.scrollY > 40);
+        },
+        { passive: true },
+      );
+
+      document.getElementById("year").textContent = new Date().getFullYear();
+      setLang(currentLang);
+      setInterval(updateOpenStatus, 60000);
+    </script>
+    <script type="text/javascript">
+      var Tawk_API = Tawk_API || {},
+        Tawk_LoadStart = new Date();
+      (function () {
+        var s1 = document.createElement("script"),
+          s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = "https://embed.tawk.to/699ede02a29a6d1c30a56a28/1jia96eo7";
+        s1.charset = "UTF-8";
+        s1.setAttribute("crossorigin", "*");
+        s0.parentNode.insertBefore(s1, s0);
+      })();
+    </script>
+  </body>
+</html>
