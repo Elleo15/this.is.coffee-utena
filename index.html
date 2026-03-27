@@ -1280,73 +1280,23 @@
             Ką sako mūsų svečiai.
           </h2>
         </div>
-        <div class="reviews-grid fade-up">
-          <div class="review-form-card">
-            <h3 data-lt="Palikite atsiliepimą" data-en="Leave a review">
-              Palikite atsiliepimą
-            </h3>
-            <div class="form-group">
-              <label class="form-label" data-lt="Vardas" data-en="Your name"
-                >Vardas</label
-              >
-              <input
-                class="form-input"
-                id="reviewName"
-                maxlength="40"
-                placeholder="Jonas Jonaitis"
-              />
-            </div>
-            <div class="form-group">
-              <label class="form-label" data-lt="Įvertinimas" data-en="Rating"
-                >Įvertinimas</label
-              >
-              <div class="stars-wrap" id="starsWrap">
-                <button class="star-btn" onclick="setStars(1)">★</button>
-                <button class="star-btn" onclick="setStars(2)">★</button>
-                <button class="star-btn" onclick="setStars(3)">★</button>
-                <button class="star-btn" onclick="setStars(4)">★</button>
-                <button class="star-btn" onclick="setStars(5)">★</button>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="form-label" data-lt="Komentaras" data-en="Comment"
-                >Komentaras</label
-              >
-              <textarea
-                class="form-textarea"
-                id="reviewComment"
-                maxlength="300"
-                rows="3"
-              ></textarea>
-            </div>
-            <button
-              class="btn-submit"
-              onclick="submitReview()"
-              data-lt="Paskelbti atsiliepimą"
-              data-en="Post review"
-            >
-              Paskelbti atsiliepimą
-            </button>
-            <p
-              class="review-success"
-              id="reviewSuccess"
-              data-lt="✅ Ačiū už atsiliepimą!"
-              data-en="✅ Thank you for your review!"
-            >
-              ✅ Ačiū už atsiliepimą!
-            </p>
-          </div>
-          <div class="reviews-list-card">
-            <h3 data-lt="Atsiliepimai" data-en="Reviews">Atsiliepimai</h3>
-            <div class="reviews-stats" id="reviewsStats" style="display: none">
-              <div class="avg-score" id="avgScore">5.0</div>
-              <div>
-                <div class="avg-stars" id="avgStars">★★★★★</div>
-                <div class="avg-count" id="avgCount"></div>
-              </div>
-            </div>
-            <div class="reviews-list" id="reviewsList"></div>
-          </div>
+        <div class="fade-up" style="max-width: 800px; margin: 0 auto">
+          <div id="disqus_thread"></div>
+          <script>
+            (function () {
+              var d = document,
+                s = d.createElement("script");
+              s.src = "https://thisiscoffee-utena.disqus.com/embed.js";
+              s.setAttribute("data-timestamp", +new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          </script>
+          <noscript
+            >Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript"
+              >comments powered by Disqus.</a
+            ></noscript
+          >
         </div>
       </div>
     </section>
@@ -1786,5 +1736,10 @@
         s0.parentNode.insertBefore(s1, s0);
       })();
     </script>
+    <script
+      id="dsq-count-scr"
+      src="//thisiscoffee-utena.disqus.com/count.js"
+      async
+    ></script>
   </body>
 </html>
