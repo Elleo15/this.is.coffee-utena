@@ -1381,16 +1381,15 @@
       }
 
       function isOpen() {
-        const now = new Date(
-          new Date().toLocaleString("en-US", { timeZone: "Europe/Vilnius" }),
-        );
-        const day = now.getDay();
-        const mins = now.getHours() * 60 + now.getMinutes();
-        const isWeekend = day === 0 || day === 6;
-        const openMins = isWeekend ? 10 * 60 : 8 * 60;
-        return mins >= openMins && mins < 20 * 60;
-      }
-
+  const now = new Date();
+  const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+  const vilnius = new Date(utc + 3600000 * 3);
+  const day = vilnius.getDay();
+  const mins = vilnius.getHours() * 60 + vilnius.getMinutes();
+  const isWeekend = day === 0 || day === 6;
+  const openMins = isWeekend ? 10 * 60 : 8 * 60;
+  return mins >= openMins && mins < 20 * 60;
+}
       function updateOpenStatus() {
         const el = document.getElementById("openStatus");
         if (!el) return;
