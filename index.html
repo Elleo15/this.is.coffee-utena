@@ -1381,14 +1381,18 @@
       }
 
       function isOpen() {
-  const now = new Date();
-  const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-  const vilnius = new Date(utc + 3600000 * 3);
-  const day = vilnius.getDay();
-  const mins = vilnius.getHours() * 60 + vilnius.getMinutes();
+  const now = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "Europe/Vilnius" })
+  );
+
+  const day = now.getDay();
+  const mins = now.getHours() * 60 + now.getMinutes();
+
   const isWeekend = day === 0 || day === 6;
   const openMins = isWeekend ? 10 * 60 : 8 * 60;
-  return mins >= openMins && mins < 20 * 60;
+  const closeMins = 20 * 60;
+
+  return mins >= openMins && mins < closeMins;
 }
       function updateOpenStatus() {
         const el = document.getElementById("openStatus");
@@ -1630,6 +1634,7 @@
         const reviews = getReviews();
         const list = document.getElementById("reviewsList");
         const stats = document.getElementById("reviewsStats");
+        if (!list || !stats) return;
         if (!reviews.length) {
           list.innerHTML =
             '<div class="no-reviews">' +
